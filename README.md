@@ -1,30 +1,56 @@
-# React + TypeScript + Vite
+## Habit Tracker
+A habit tracker app with the calculation of streak (daily & weekly).
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Project Setup
 
-Currently, two official plugins are available:
+### Prerequisites:
+- Node.js and `npm` installed.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Installation:
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+1. Clone the repository:
 
-- Configure the top-level `parserOptions` property like this:
+```bash
+git clone https://github.com/your-username/newu-streakassignment.git
+```
+2. Navigate to the project directory:
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json', './tsconfig.app.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+```bash
+cd newu-streakassignment
+```
+3. Install dependencies:
+
+```bash
+npm install
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Available Scripts
+- **`npm run dev or vite`**: 
+
+    Starts development server with hot module replacement (HMR). Server will be up on  `http://localhost:5173/`
+
+- `npm run build`: 
+    
+    Builds the application for production.
+
+### Project Structure 
+Here is list of main files & directories:
+- *src*: Contains source code for the application.
+    - *components*: Contains building blocks of the application
+    - *hooks*: Custom hooks like `useLocalStorage` and `useTodos`
+    - *services*: Services to interact with components i.e., `localStorageService`
+    - *state*: Application global states
+    - *types*: Interfaces & Types
+    - *`App.tsx`*: Main starting point of application  
+- *public*: Static assets like images and index.html.
+- *package.json*: Project dependencies and scripts.
+- *tsconfig.json*: TypeScript configuration.
+
+
+### Technologies Used
+- **Vite**: Build tool for fast development and production builds.
+- **React**: JavaScript library for building user interfaces.
+- **Redux**: State management library.
+- **TypeScript**: Typed superset of JavaScript.
+- **Tailwind CSS**: Utility-first CSS framework.
