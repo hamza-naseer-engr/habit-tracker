@@ -1,4 +1,4 @@
-import { Todo, Streak, StreakMap } from "../types";
+import { Todo, StreakMap } from "../types";
 
 export const loadTodos = (): Todo[] => {
   const todos = localStorage.getItem("todos");
@@ -14,22 +14,6 @@ export const loadTodos = (): Todo[] => {
 
 export const saveTodos = (todos: Todo[]) => {
   localStorage.setItem("todos", JSON.stringify(todos));
-};
-
-export const loadStreaks = (): Streak[] => {
-  const streaks = localStorage.getItem("streaks");
-  if (streaks) {
-    try {
-      return JSON.parse(streaks);
-    } catch (error) {
-      return [];
-    }
-  }
-  return [];
-};
-
-export const saveStreaks = (streaks: Streak[]) => {
-  localStorage.setItem("streaks", JSON.stringify(streaks));
 };
 
 export const loadStreakMap = (): StreakMap => {
