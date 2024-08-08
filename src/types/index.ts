@@ -8,16 +8,8 @@ export interface Todo {
   creationDate: string;
 }
 
-export interface Streak {
-  todoId: string;
-  currentStreak: number;
-  longestStreak: number;
-  lastCompleted: string;
-}
-
 export interface RootState {
   todos: Todo[];
-  streaks: Streak[];
 }
 
 export interface StreakInfo {
