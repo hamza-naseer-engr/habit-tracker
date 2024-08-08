@@ -12,8 +12,9 @@ A habit tracker app with the calculation of streak (daily & weekly).
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/your-username/newu-streakassignment.git
+git clone https://github.com/hamza-naseer-engr/habit-tracker.git
 ```
+
 2. Navigate to the project directory:
 
 ```bash
@@ -25,7 +26,7 @@ cd newu-streakassignment
 npm install
 ```
 
-## Available Scripts
+### Available Scripts
 - **`npm run dev or vite`**: 
 
     Starts development server with hot module replacement (HMR). Server will be up on  `http://localhost:5173/`
@@ -34,7 +35,7 @@ npm install
     
     Builds the application for production.
 
-### Project Structure 
+## Project Structure 
 Here is list of main files & directories:
 - *src*: Contains source code for the application.
     - *components*: Contains building blocks of the application
@@ -45,10 +46,8 @@ Here is list of main files & directories:
     - *`App.tsx`*: Main starting point of application  
 - *public*: Static assets like images and index.html.
 - *package.json*: Project dependencies and scripts.
-- *tsconfig.json*: TypeScript configuration.
 
-
-### Technologies Used
+## Technologies Used
 - **Vite**: Build tool for fast development and production builds.
 - **React**: JavaScript library for building user interfaces.
 - **Redux**: State management library.
