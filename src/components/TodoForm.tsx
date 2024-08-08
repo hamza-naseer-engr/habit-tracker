@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import Select from "react-select";
+
 import { useTodos } from "../hooks/useTodos";
 import { Todo } from "../types";
+import { daysOfWeekOptions } from "../utils/constants";
+
 import { v4 as uuidv4 } from "uuid";
 
 interface TodoFormProps {
@@ -34,16 +37,6 @@ const TodoForm: React.FC<TodoFormProps> = ({ currentDate }) => {
     setDaysOfWeek([]);
     setTimesPerWeek(1);
   };
-
-  const daysOfWeekOptions = [
-    { value: 0, label: "Monday" },
-    { value: 1, label: "Tuesday" },
-    { value: 2, label: "Wednesday" },
-    { value: 3, label: "Thursday" },
-    { value: 4, label: "Friday" },
-    { value: 5, label: "Saturday" },
-    { value: 6, label: "Sunday" },
-  ];
 
   const isFormValid = () => {
     if (trackingType === "daily") {

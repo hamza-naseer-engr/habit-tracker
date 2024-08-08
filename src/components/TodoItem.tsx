@@ -14,7 +14,7 @@ const TodoItem: React.FC<TodoItemProps> = ({
   currentDate,
   setStreakMap,
 }) => {
-  const { complete, remove } = useTodos(currentDate);
+  const { complete } = useTodos(currentDate);
 
   const handleComplete = () => {
     complete(todo.id, currentDate);
@@ -37,14 +37,8 @@ const TodoItem: React.FC<TodoItemProps> = ({
 
         setStreakMap(updatedStreakMap);
         localStorage.setItem("streakMap", JSON.stringify(updatedStreakMap));
-      } else {
-        console.log("streakMap not found in localStorage");
       }
     }
-  };
-
-  const handleRemove = () => {
-    remove(todo.id);
   };
 
   const flag = todo.completed?.includes(currentDate);
@@ -60,14 +54,6 @@ const TodoItem: React.FC<TodoItemProps> = ({
           {todo.text}
         </p>
         <div className="flex gap-2">
-          <button
-            onClick={handleRemove}
-            className={`px-4 py-2 text-white font-semibold rounded-lg focus:outline-none bg-red-500 hover:bg-red-600
-          `}
-          >
-            Delete
-          </button>
-
           <button
             onClick={handleComplete}
             className={`px-4 py-2 text-white font-semibold rounded-lg focus:outline-none ${
