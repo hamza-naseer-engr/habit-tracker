@@ -1,16 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 interface DatePickerProps {
-  onDateChange: (date: Date) => void;
+  onDateChange: (date: string) => void;
 }
 
 const DatePicker: React.FC<DatePickerProps> = ({ onDateChange }) => {
-  const [date, setDate] = useState<string>(new Date().toISOString().substring(0, 10));
+  const [date, setDate] = useState<string>(
+    new Date().toISOString().substring(0, 10)
+  );
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newDate = e.target.value;
     setDate(newDate);
-    onDateChange(new Date(newDate));
+    onDateChange(new Date(newDate).toISOString().split("T")[0]);
   };
 
   return (

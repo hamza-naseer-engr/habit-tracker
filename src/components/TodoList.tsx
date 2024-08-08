@@ -1,19 +1,26 @@
-import React from 'react';
-import { useTodos } from '../hooks/useTodos';
-import TodoItem from './TodoItem';
+import React from "react";
+import { useTodos } from "../hooks/useTodos";
+import TodoItem from "./TodoItem";
+import { loadTodos } from "../services/localStorageService";
 
 interface TodoListProps {
-  currentDate: Date;
+  currentDate: string;
+  setStreakMap: any;
 }
 
-const TodoList: React.FC<TodoListProps> = ({ currentDate }) => {
+const TodoList: React.FC<TodoListProps> = ({ currentDate, setStreakMap }) => {
   const { todos } = useTodos(currentDate);
 
   return (
     <div className="mt-6 space-y-4">
       {todos.length > 0 ? (
-        todos.map(todo => (
-          <TodoItem key={todo.id} todo={todo} currentDate={currentDate} />
+        todos.map((todo) => (
+          <TodoItem
+            setStreakMap={setStreakMap}
+            key={todo.id}
+            todo={todo}
+            currentDate={currentDate}
+          />
         ))
       ) : (
         <p className="text-center text-gray-500">No todos available</p>

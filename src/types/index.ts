@@ -1,8 +1,8 @@
 export interface Todo {
   id: string;
   text: string;
-  completed: boolean;
-  trackingType: 'daily' | 'weekly';
+  completed: string[];
+  trackingType: "daily" | "weekly";
   daysOfWeek?: number[];
   timesPerWeek?: number;
   creationDate: Date;
@@ -18,4 +18,13 @@ export interface Streak {
 export interface RootState {
   todos: Todo[];
   streaks: Streak[];
+}
+
+export interface StreakInfo {
+  currentStreak: number;
+  todayRemainingTasks: number;
+}
+
+export interface StreakMap {
+  [date: string]: StreakInfo;
 }
