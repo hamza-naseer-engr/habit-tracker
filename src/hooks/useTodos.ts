@@ -1,10 +1,10 @@
 import { useSelector, useDispatch } from "react-redux";
+
 import { RootState, AppDispatch } from "../state/store";
 import {
   addTodo,
   completeTodo,
   updateTodo,
-  deleteTodo,
 } from "../state/slices/todosSlice";
 import { Todo } from "../types";
 
@@ -43,7 +43,6 @@ export const useTodos = (currentDate: string) => {
   const complete = (id: string, currentDate: string) =>
     dispatch(completeTodo({ id, currentDate }));
   const update = (todo: Todo) => dispatch(updateTodo(todo));
-  const remove = (id: string) => dispatch(deleteTodo(id));
 
-  return { todos, add, complete, update, remove };
+  return { todos, add, complete, update };
 };
