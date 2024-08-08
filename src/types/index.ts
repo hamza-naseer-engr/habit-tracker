@@ -5,7 +5,7 @@ export interface Todo {
   trackingType: "daily" | "weekly";
   daysOfWeek?: number[];
   timesPerWeek?: number;
-  creationDate: Date;
+  creationDate: string;
 }
 
 export interface Streak {

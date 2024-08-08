@@ -3,8 +3,7 @@ import TodoList from "./components/TodoList";
 import TodoForm from "./components/TodoForm";
 import DatePicker from "./components/DatePicker";
 import { useLocalStorage } from "./hooks/useLocalStorage";
-import { StreakMap, Todo } from "./types";
-import { TODAY } from "./types/constants";
+import { Todo } from "./types";
 
 const App: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState(
@@ -13,30 +12,7 @@ const App: React.FC = () => {
   const { streakMap, setStreakMap } = useLocalStorage();
 
   const [currStreak, setCurrStreak] = useState<number>(0);
-  // const currentDateStr = selectedDate.toISOString().split("T")[0];
 
-  // function getWeekDates(currentDate: any) {
-  //   const date = new Date(currentDate);
-  //   const day = date.getDay();
-
-  //   // Calculate the difference from Monday (day 0)
-  //   const diffFromMonday = day === 0 ? -6 : -day;
-
-  //   // Calculate the Monday of the current week
-  //   const monday = new Date(date);
-  //   monday.setDate(date.getDate() + diffFromMonday);
-
-  //   const weekDates = [];
-
-  //   // Generate dates from Monday to Sunday
-  //   for (let i = 0; i < 7; i++) {
-  //     const weekDate = new Date(monday);
-  //     weekDate.setDate(monday.getDate() + i);
-  //     weekDates.push(weekDate.toISOString().split("T")[0]);
-  //   }
-
-  //   return weekDates;
-  // }
   function getWeekDates(currentDate: string): string[] {
     const date = new Date(currentDate);
     const day = date.getDay();
@@ -84,24 +60,11 @@ const App: React.FC = () => {
         });
 
       // Log the number of tasks for the provided date
-      console.log(
-        `${date}: ${todosForToday.length} remaining tasks AND`,
-        totalTodos,
-        " was assigned."
-      );
-      // console.log("streakMap till now:", streakMap[date.toString()], date);
-      // if (!streakMap[date.toString()]) {
-      // Determine the value of x based on todosForToday.length
-      //-------------------------------------------------------------------------
-      // const currFullDate = new Date(date);
-      // currFullDate.setDate(currFullDate.getDate() - 1);
-      // const prevDate = currFullDate.toISOString().split("T")[0];
-
-      // const oldStreak = streakMap[prevDate.toString()]?.currentStreak
-      //   ? streakMap[prevDate.toString()]?.currentStreak
-      //   : 0;
-
-      //-------------------------WeeklyTodos------------------------------------------------
+      // console.log(
+      //   `${date}: ${todosForToday.length} remaining tasks AND`,
+      //   totalTodos,
+      //   " was assigned."
+      // );
 
       let totalWeeklyTodos = 0;
       let x = todosForToday.length === 0 ? totalTodos + prevStreak : 0;
@@ -138,14 +101,9 @@ const App: React.FC = () => {
         }
       }
 
-      // console.log("here x is:", x, totalTodos, prevStreak);
-
-      // Update the streakMap with the new date entry
-      // setStreakMap({
-      //   ...streakMap,
-      //   [date.toString()]: { currentStreak: x },
-      // });
-      const streakMapCurr = JSON.parse(localStorage.getItem("streakMap"));
+      const streakMapCurr = JSON.parse(
+        localStorage.getItem("streakMap") as string
+      );
 
       const updatedStreakMap = {
         ...streakMapCurr,
@@ -160,102 +118,17 @@ const App: React.FC = () => {
     }
   };
 
-  // const remains = (prevStreak: number, date: string) => {
-  //   const todosString = localStorage.getItem("todos");
-  //   let totalTodos = 0;
-  //   let totalWeeklyTodos = 0;
-
-  //   if (todosString) {
-  //     const todos = JSON.parse(todosString);
-  //     const currentDay = new Date(date).getDay();
-
-  //     // Filter todos for the current day----Daily----
-  //     const todosForToday = todos
-  //       .filter((todo: Todo) => todo.trackingType === "daily")
-  //       .filter((todo: Todo) => {
-  //         if (todo.daysOfWeek && todo.daysOfWeek.includes(currentDay)) {
-  //           totalTodos += 1;
-  //         }
-  //         return (
-  //           todo.daysOfWeek &&
-  //           todo.daysOfWeek.includes(currentDay) &&
-  //           !todo.completed.includes(date) &&
-  //           new Date(todo.creationDate) <= new Date(date)
-  //         );
-  //       });
-
-  //     console.log(
-  //       `${date}: ${todosForToday.length} remaining daily tasks AND`,
-  //       totalTodos,
-  //       " were assigned."
-  //     );
-
-  //     // Filter todos for the week----Weekly----
-  //     const currentWeek = getWeekDates(date);
-  //     console.log("---------------Checking------------", currentWeek);
-  //     const todosForWeeks = todos
-  //       .filter((todo: Todo) => todo.trackingType === "weekly")
-  //       .filter((todo: Todo) => {
-  //         const timesCompleted = todo.completed.filter((d: string) =>
-  //           currentWeek.includes(d)
-  //         ).length;
-  //         totalWeeklyTodos += timesCompleted;
-  //         return (
-  //           timesCompleted < todo.timesPerWeek &&
-  //           new Date(todo.creationDate) <= new Date(date)
-  //         );
-  //       });
-
-  //     // Determine the value of x based on todosForToday.length and todosForWeeks.length
-  //     let x = todosForToday.length === 0 ? totalTodos + prevStreak : 0;
-
-  //     // Update the streak only on Sunday
-  //     const isSunday = new Date(date).getDay() === 6; // Sunday (0) should be checked for end of week
-
-  //     if (isSunday) {
-  //       // If all weekly todos are done by Sunday
-  //       if (todosForWeeks.length === 0) {
-  //         x = totalWeeklyTodos + prevStreak;
-  //       } else if (todosForWeeks.length > 0) {
-  //         x = 0;
-  //       }
-  //     }
-
-  //     console.log("here x is:", x, totalTodos, prevStreak);
-
-  //     // Update the streakMap with the new date entry
-  //     const streakMapCurr = JSON.parse(localStorage.getItem("streakMap"));
-  //     const updatedStreakMap = {
-  //       ...streakMapCurr,
-  //       [date]: { currentStreak: x },
-  //     };
-
-  //     setStreakMap(updatedStreakMap);
-  //     localStorage.setItem("streakMap", JSON.stringify(updatedStreakMap));
-
-  //     return x;
-  //   } else {
-  //     console.log("No todos found in localStorage");
-  //   }
-  // };
-
-  function logDatesFromCurrentToEarliest(selectedDate, earliestDate) {
+  function logDatesFromCurrentToEarliest(
+    selectedDate: Date,
+    earliestDate: Date
+  ) {
     let current = new Date(earliestDate);
     const endDate = new Date(selectedDate);
     let prevStreak = 0;
 
-    // while (current >= earliestDate) {
-    //   // console.log(current.toISOString().split("T")[0]);
-    //   current.setDate(current.getDate() - 1);
-    //   //instead of this goo to the map...
-    //   remains(current.toISOString().split("T")[0]);
-    // }
-
     while (current <= endDate) {
-      // console.log(current.toISOString().split("T")[0]);
       prevStreak = remains(prevStreak, current.toISOString().split("T")[0]);
       current.setDate(current.getDate() + 1);
-      //instead of this goo to the map...
     }
   }
 
@@ -263,11 +136,10 @@ const App: React.FC = () => {
     if (streakMap[selectedDate]) {
       setCurrStreak(streakMap[selectedDate].currentStreak);
     } else {
-      setStreakMap((prev) => ({
+      setStreakMap((prev: any) => ({
         ...prev,
         [selectedDate]: { currentStreak: 0 },
       }));
-      // setCurrStreak(0);
     }
   }, [selectedDate, streakMap, setStreakMap]);
 

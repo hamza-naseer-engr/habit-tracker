@@ -1,7 +1,6 @@
 import React from "react";
 import { useTodos } from "../hooks/useTodos";
 import TodoItem from "./TodoItem";
-import { loadTodos } from "../services/localStorageService";
 
 interface TodoListProps {
   currentDate: string;

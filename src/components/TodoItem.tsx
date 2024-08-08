@@ -1,9 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Todo } from "../types";
 import { useTodos } from "../hooks/useTodos";
-import { useStreak } from "../hooks/useStreak";
 import Ribbon from "./Ribbon";
-import { TODAY } from "../types/constants";
 
 interface TodoItemProps {
   todo: Todo;
@@ -17,69 +15,32 @@ const TodoItem: React.FC<TodoItemProps> = ({
   setStreakMap,
 }) => {
   const { complete, remove } = useTodos(currentDate);
-  const { update } = useStreak();
 
-  // const handleComplete = () => {
-  //   complete(todo.id, currentDate);
-
-  //   const streakMap = JSON.parse(localStorage.getItem("streakMap"));
-  //   if (streakMap) {
-  //     const cStreak = streakMap[currentDate.toString()].currentStreak;
-  //     const updatedStreakMap = {
-  //       ...streakMap,
-  //       [currentDate.toString()]: { currentStreak: cStreak + 1 },
-  //     };
-  //     setStreakMap(updatedStreakMap);
-  //     localStorage.setItem("streakMap", JSON.stringify(updatedStreakMap));
-  //   } else {
-  //     console.log("streakMap not found in localStorage");
-  //   }
-  // };
-  // const handleComplete = () => {
-  //   complete(todo.id, currentDate);
-
-  //   const streakMap = JSON.parse(localStorage.getItem("streakMap"));
-  //   if (streakMap) {
-  //     const currentStreak = streakMap[currentDate.toString()]
-  //       ? streakMap[currentDate.toString()].currentStreak
-  //       : 0;
-
-  //     const updatedStreakMap = {
-  //       ...streakMap,
-  //       [currentDate.toString()]: { currentStreak: currentStreak + 1 },
-  //     };
-
-  //     setStreakMap(updatedStreakMap);
-  //     localStorage.setItem("streakMap", JSON.stringify(updatedStreakMap));
-  //   } else {
-  //     console.log("streakMap not found in localStorage");
-  //   }
-  // };
   const handleComplete = () => {
     complete(todo.id, currentDate);
 
-    // if (todo.trackingType === "daily") {
-    const streakMap = JSON.parse(localStorage.getItem("streakMap"));
-    if (streakMap) {
-      const prevDate = new Date(currentDate);
-      prevDate.setDate(prevDate.getDate() - 1);
-      const prevDateString = prevDate.toISOString().split("T")[0];
+    if (todo.trackingType === "daily") {
+      const streakMap = JSON.parse(localStorage.getItem("streakMap") as string);
+      if (streakMap) {
+        const prevDate = new Date(currentDate);
+        prevDate.setDate(prevDate.getDate() - 1);
+        const prevDateString = prevDate.toISOString().split("T")[0];
 
-      const prevStreak = streakMap[prevDateString]
-        ? streakMap[prevDateString].currentStreak
-        : 0;
+        const prevStreak = streakMap[prevDateString]
+          ? streakMap[prevDateString].currentStreak
+          : 0;
 
-      const updatedStreakMap = {
-        ...streakMap,
-        [currentDate.toString()]: { currentStreak: prevStreak + 1 },
-      };
+        const updatedStreakMap = {
+          ...streakMap,
+          [currentDate.toString()]: { currentStreak: prevStreak + 1 },
+        };
 
-      setStreakMap(updatedStreakMap);
-      localStorage.setItem("streakMap", JSON.stringify(updatedStreakMap));
-    } else {
-      console.log("streakMap not found in localStorage");
+        setStreakMap(updatedStreakMap);
+        localStorage.setItem("streakMap", JSON.stringify(updatedStreakMap));
+      } else {
+        console.log("streakMap not found in localStorage");
+      }
     }
-    // }
   };
 
   const handleRemove = () => {
