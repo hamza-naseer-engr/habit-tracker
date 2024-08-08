@@ -58,6 +58,7 @@ const TodoItem: React.FC<TodoItemProps> = ({
   const handleComplete = () => {
     complete(todo.id, currentDate);
 
+    // if (todo.trackingType === "daily") {
     const streakMap = JSON.parse(localStorage.getItem("streakMap"));
     if (streakMap) {
       const prevDate = new Date(currentDate);
@@ -78,6 +79,7 @@ const TodoItem: React.FC<TodoItemProps> = ({
     } else {
       console.log("streakMap not found in localStorage");
     }
+    // }
   };
 
   const handleRemove = () => {
@@ -91,7 +93,7 @@ const TodoItem: React.FC<TodoItemProps> = ({
       <div className="flex items-center justify-between p-4 bg-white border border-gray-300 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300">
         <p
           className={`text-lg ${
-            todo.completed ? "line-through text-gray-500" : "text-gray-800"
+            flag ? "line-through text-gray-500" : "text-gray-800"
           }`}
         >
           {todo.text}
