@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+
 import { Todo } from "../../types";
 
 const initialState: Todo[] = [];
@@ -11,7 +12,6 @@ const todosSlice = createSlice({
       state.push(action.payload);
     },
     completeTodo: (state, action: PayloadAction<any>) => {
-      console.log(action.payload);
       const { id, currentDate } = action.payload;
 
       const todo = state.find((todo) => todo.id === id);
@@ -25,12 +25,9 @@ const todosSlice = createSlice({
         state[index] = action.payload;
       }
     },
-    deleteTodo: (state, action: PayloadAction<string>) => {
-      return state.filter((todo) => todo.id !== action.payload);
-    },
   },
 });
 
-export const { addTodo, completeTodo, updateTodo, deleteTodo } =
+export const { addTodo, completeTodo, updateTodo } =
   todosSlice.actions;
 export default todosSlice.reducer;
